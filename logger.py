@@ -56,14 +56,17 @@ def write_hist_value_callback():
 
   for i in range(len(dht)):    
     write_value(open_file_ensure_header(dht[i].hist_temperature_file_path, 'a', csv_header_temperature), latest_value_datetime, dht[i].latest_temperature)
+    print ("History callback written from sensor: " + dht[i] + " Timestamp: " + latest_value_datetime + " Temp: " + dht[i].latest_temperature)
     write_value(open_file_ensure_header(dht[i].hist_humidity_file_path, 'a', csv_header_humidity), latest_value_datetime, dht[i].latest_humidity)
+    print ("History callback written from sensor: " + dht[i] + " Timestamp: " + latest_value_datetime + " Temp: " + dht[i].latest_humidity)
+print ("History files written")
  
 def write_latest_value(latest_temperature_file_path, latest_humidity_file_path,latest_temperature,latest_humidity):
   with open_file_ensure_header(latest_temperature_file_path, 'w', csv_header_temperature) as f_latest_value:  #open and truncate
     write_value(f_latest_value, latest_value_datetime, latest_temperature)
   with open_file_ensure_header(latest_humidity_file_path, 'w', csv_header_humidity) as f_latest_value:  #open and truncate
     write_value(f_latest_value, latest_value_datetime, latest_humidity)
-print ("Ignoring first 2 sensor values to improve quality...");
+print ("Ignoring first 2 sensor values to improve quality...")
 
 def sendThing(tempOut,humOut,tempIn,humIn):
   #channelID = "your thingspeak channelid key here"
@@ -104,12 +107,12 @@ try:
       while True:
         hum, temp = Adafruit_DHT.read_retry(sensor, dht[i].gpio)
         if hum is not None and temp is not None:
-          if hum < 100 and hum > 0 and temp < 50 and temp > -35:
+          if hum < 100 and hum > 0 and temp < 60 and temp > -35:
             dht[i].latest_humidity, dht[i].latest_temperature = hum, temp
             latest_value_datetime = datetime.today()
             write_latest_value(dht[i].latest_temperature_file_path,dht[i].latest_humidity_file_path,temp,hum)
             break
-      time.sleep(1)
+      time.sleep(30)
 except (KeyboardInterrupt, SystemExit):
   scheduler.shutdown()
 
