@@ -1,0 +1,26 @@
+{
+  "name": "weatherlog",
+  "version": "1.0.0",
+  "description": "Weather logging pi",
+  "main": "index.js",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "csv-parse": "^1.2.0",
+    "express": "^4.15.3",
+    "glob": "^7.1.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JR-Y/weatherPi.git"
+  },
+  "author": "John-Robert Yrjölä",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JR-Y/weatherPi/issues"
+  },
+  "homepage": "https://github.com/JR-Y/weatherPi#readme"
+}
