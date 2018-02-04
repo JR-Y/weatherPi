@@ -1,0 +1,3 @@
+Still in works...
+
+Uses code from http://www.home-automation-community.com/temperature-and-humidity-from-am2302-dht22-sensor-displayed-as-chart/
