@@ -56,9 +56,9 @@ def write_hist_value_callback():
 
   for i in range(len(dht)):    
     write_value(open_file_ensure_header(dht[i].hist_temperature_file_path, 'a', csv_header_temperature), latest_value_datetime, dht[i].latest_temperature)
-    print ("History callback written from sensor: " + dht[i] + " Timestamp: " + latest_value_datetime + " Temp: " + dht[i].latest_temperature)
+    #print ("History callback written from sensor: " + dht[i] + " Timestamp: " + latest_value_datetime + " Temp: " + dht[i].latest_temperature)
     write_value(open_file_ensure_header(dht[i].hist_humidity_file_path, 'a', csv_header_humidity), latest_value_datetime, dht[i].latest_humidity)
-    print ("History callback written from sensor: " + dht[i] + " Timestamp: " + latest_value_datetime + " Temp: " + dht[i].latest_humidity)
+    #print ("History callback written from sensor: " + dht[i] + " Timestamp: " + latest_value_datetime + " Temp: " + dht[i].latest_humidity)
 print ("History files written")
  
 def write_latest_value(latest_temperature_file_path, latest_humidity_file_path,latest_temperature,latest_humidity):
@@ -111,8 +111,9 @@ try:
             dht[i].latest_humidity, dht[i].latest_temperature = hum, temp
             latest_value_datetime = datetime.today()
             write_latest_value(dht[i].latest_temperature_file_path,dht[i].latest_humidity_file_path,temp,hum)
+            print (dht[i].latest_temperature_file_path, temp, dht[i].latest_humidity_file_path, hum)
             break
-      time.sleep(30)
+      time.sleep(20)
 except (KeyboardInterrupt, SystemExit):
   scheduler.shutdown()
 
