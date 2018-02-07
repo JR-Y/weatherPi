@@ -28,10 +28,10 @@
     }
   </style>
   <script>
-    chartDatetimeFormatter   = d3.time.format("%d.%m.%y - %H:%M"); //see https://github.com/mbostock/d3/wiki/Time-Formatting
-    tableDatetimeFormatter   = d3.time.format("%d.%m.%y - %H:%M:%S"); //see https://github.com/mbostock/d3/wiki/Time-Formatting
-    soapServiceHistDataUrl   = "http://raspberrypi:9999/historical-sensordata/";
-    soapServiceLatestDataUrl = "http://raspberrypi:9999/latest-sensordata/";
+    chartDatetimeFormatter   = d3.time.format("%d.%m.%y - %H:%M");                  //see https://github.com/mbostock/d3/wiki/Time-Formatting
+    tableDatetimeFormatter   = d3.time.format("%d.%m.%y - %H:%M:%S");               //see https://github.com/mbostock/d3/wiki/Time-Formatting
+    soapServiceHistDataUrl   = "http://192.168.4.143:9999/historical-sensordata/";  //Use your local IP
+    soapServiceLatestDataUrl = "http://192.168.4.143:9999/latest-sensordata/";      //Use your local IP
   </script>
   <script>
     $(function() {
@@ -97,6 +97,7 @@
       $.ajax({
         url: soapServiceHistDataUrl + "?fromtimestamp=" + fromTs + "&totimestamp=" + toTs
       }).then(function(data) {
+        //Console.log(data);
         var chartData = [];
         data.forEach(function(elem) {
           var color = elem.sensorKind == 'temperature' ? '#A4C4E8' : elem.sensorKind == 'humidity' ? '#FCDAB0' : '#336600';

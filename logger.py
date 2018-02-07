@@ -49,16 +49,22 @@ def open_file_ensure_header(file_path, mode, csv_header):
   return f
 
 def write_hist_value_callback():
+  print ("Writing historyvalues")
   try:
   	sendThing(dht[0].latest_temperature,dht[0].latest_humidity,dht[1].latest_temperature,dht[1].latest_humidity)
   except:
-    print ("There was an error while publishing the data.")   
-
-  for i in range(len(dht)):    
-    write_value(open_file_ensure_header(dht[i].hist_temperature_file_path, 'a', csv_header_temperature), latest_value_datetime, dht[i].latest_temperature)
-    #print ("History callback written from sensor: " + dht[i] + " Timestamp: " + latest_value_datetime + " Temp: " + dht[i].latest_temperature)
-    write_value(open_file_ensure_header(dht[i].hist_humidity_file_path, 'a', csv_header_humidity), latest_value_datetime, dht[i].latest_humidity)
-    #print ("History callback written from sensor: " + dht[i] + " Timestamp: " + latest_value_datetime + " Temp: " + dht[i].latest_humidity)
+    print ("There was an error while publishing the data.")  
+  print ("Thinspark values sent") 
+  try:
+    for i in range(len(dht)):
+      print("writing historyvalues")    
+      write_value(open_file_ensure_header(dht[i].hist_temperature_file_path, 'a', csv_header_temperature), latest_value_datetime, dht[i].latest_temperature)
+      print ("History callback written from sensor: ",dht[i]," Timestamp: ",latest_value_datetime," Temp: ", dht[i].latest_temperature)
+      write_value(open_file_ensure_header(dht[i].hist_humidity_file_path, 'a', csv_header_humidity), latest_value_datetime, dht[i].latest_humidity)
+      print ("History callback written from sensor: ", dht[i], " Timestamp: ", latest_value_datetime, " Temp: ", dht[i].latest_humidity)
+    print("historyvalues written") 
+  except:
+    print("failed to save historyvalues")
 print ("History files written")
  
 def write_latest_value(latest_temperature_file_path, latest_humidity_file_path,latest_temperature,latest_humidity):
